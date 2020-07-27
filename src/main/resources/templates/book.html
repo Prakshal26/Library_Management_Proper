@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Books</title>
+</head>
+<body>
+<!--/*@thymesVar id="bookType" type="type"*/-->
+<h1>List Book</h1>
+<table>
+<tr th:each="book : ${books}">
+    <td th:text="${book.id}"></td>
+    <td th:text="${book.name}"></td>
+    <td th:text="${book.bookType.type}"></td>
+</tr>
+</table>
+</body>
+</html>
