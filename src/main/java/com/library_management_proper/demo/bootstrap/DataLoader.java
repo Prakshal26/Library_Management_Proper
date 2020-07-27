@@ -10,13 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 public class DataLoader implements CommandLineRunner {
 
 
-    BookService bookService;
-    BookTypeService bookTypeService;
-    UserService userService;
+   private final BookService bookService;
+   private final BookTypeService bookTypeService;
+   private final UserService userService;
 
     @Autowired
     public DataLoader(BookService bookService, BookTypeService bookTypeService,UserService userService) {
@@ -45,6 +47,7 @@ public class DataLoader implements CommandLineRunner {
         book1.setName("ML Aggarwal");
         book1.setPrice(500);
         book1.setIsbn("111BN");
+        book1.setIssueDate(LocalDate.now());
         book1.setBookType(bookType1);
 
 
@@ -53,6 +56,7 @@ public class DataLoader implements CommandLineRunner {
         book2.setName("RS Sharma");
         book2.setPrice(1000);
         book2.setIsbn("2200N");
+        book2.setIssueDate(LocalDate.now());
         book2.setBookType(bookType2);
 
 
@@ -65,8 +69,11 @@ public class DataLoader implements CommandLineRunner {
         user1.getBook().add(book1);
         user1.getBook().add(book2);
 
+        book1.setUser(user1);
+        book2.setUser(user1);
 
-      //  userService.save(user1);
+        userService.save(user1);
+
         bookService.save(book1);
         bookService.save(book2);
 

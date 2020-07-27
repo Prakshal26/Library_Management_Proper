@@ -1,6 +1,9 @@
 package com.library_management_proper.demo.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -12,6 +15,10 @@ public class Book {
     private String name;
     private int price;
     private String isbn;
+
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate issueDate;
 
     @ManyToOne
     private BookType bookType;
@@ -68,13 +75,24 @@ public class Book {
         this.user = user;
     }
 
+    public LocalDate getIssueDate() {
+        return issueDate;
+    }
+
+    public void setIssueDate(LocalDate issueDate) {
+        this.issueDate = issueDate;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", isbn=" + isbn +
+                ", isbn='" + isbn + '\'' +
+                ", issueDate=" + issueDate +
+                ", bookType=" + bookType +
+                ", user=" + user +
                 '}';
     }
 }
